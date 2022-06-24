@@ -76,6 +76,8 @@ fn do_spawn_common(
     current_ref: &ThreadRef,
     exec_now: bool,
 ) -> Result<pid_t> {
+    println!("do_spawn_common: path: {} envp: {:?}", elf_path, envp);
+
     let new_process_ref = new_process(
         elf_path,
         argv,
@@ -94,6 +96,8 @@ fn do_spawn_common(
     } else {
         task::enqueue(new_main_thread);
     };
+
+    println!("Task enqueued!");
 
     let new_pid = new_process_ref.pid();
     Ok(new_pid)

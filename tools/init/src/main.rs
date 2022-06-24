@@ -42,6 +42,12 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     // Mount the image
     const SYS_MOUNT_FS: i64 = 363;
+
+    let res =  std::env::current_dir();
+    match res {
+        Ok(path) =>  println!("Mounting image... {}", path.into_os_string().into_string().unwrap()),
+        _ => println!("Could not get cwd.")
+    }
     let ret = unsafe { syscall(SYS_MOUNT_FS, key_ptr, occlum_json_mac_ptr) };
     if ret < 0 {
         return Err(Box::new(std::io::Error::last_os_error()));

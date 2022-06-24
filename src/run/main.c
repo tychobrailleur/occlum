@@ -55,6 +55,8 @@ int main(int argc, char *argv[]) {
         .stdio = (const struct occlum_stdio_fds *) &io_fds,
         .pid = &libos_tid,
     };
+
+    printf("About to create process: %s pid: %d\n", cmd_path, libos_tid);
     if (occlum_pal_create_process(&create_process_args) < 0) {
         // Command not found or other internal errors
         return 127;
@@ -64,6 +66,8 @@ int main(int argc, char *argv[]) {
         .pid = libos_tid,
         .exit_value = &exit_status,
     };
+
+    printf("About to run process: pid: %d\n", libos_tid);
     if (occlum_pal_exec(&exec_args) < 0) {
         // Command not found or other internal errors
         return 127;

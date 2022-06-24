@@ -34,6 +34,7 @@ fn dequeue(libos_tid: pid_t) -> Result<ThreadRef> {
 
 /// Execute the specified LibOS thread in the current host thread.
 pub fn exec(libos_tid: pid_t, host_tid: pid_t) -> Result<i32> {
+    println!("task::exec {}", libos_tid);
     let this_thread: ThreadRef = dequeue(libos_tid)?;
     this_thread.start(host_tid);
 

@@ -640,6 +640,9 @@ pub fn do_mount_rootfs(
     key_ptr: *const sgx_key_128bit_t,
     occlum_json_mac_ptr: *const sgx_aes_gcm_128bit_tag_t,
 ) -> Result<isize> {
+
+
+    println!("Oh golly mounting rootfs");
     let key = if key_ptr.is_null() {
         None
     } else {

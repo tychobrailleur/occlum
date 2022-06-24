@@ -49,6 +49,7 @@ pub extern "C" fn occlum_ecall_init(
     }
 
     assert!(!instance_dir.is_null());
+    println!("occlum_ecall_init: {:?}", instance_dir);
 
     let log_level = {
         let input_log_level = match parse_log_level(log_level) {
@@ -181,6 +182,7 @@ pub extern "C" fn occlum_ecall_exec_thread(libos_pid: i32, host_tid: i32) -> i32
         return ecall_errno!(EAGAIN);
     }
 
+    println!("occlum_ecall_exec_thread");
     panic::catch_unwind(|| {
         backtrace::__rust_begin_short_backtrace(|| {
             match do_exec_thread(libos_pid as pid_t, host_tid as pid_t) {
